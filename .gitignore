@@ -54,3 +54,5 @@ intel-cache.sqlite-journal
 *.db
 demo-output/
 recordings/
+.env.production
+logs/
