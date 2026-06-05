@@ -56,3 +56,8 @@ demo-output/
 recordings/
 .env.production
 logs/
+
+# README backups
+README.md.bak.*
+README.md.WRONG_*
+README_old.md
