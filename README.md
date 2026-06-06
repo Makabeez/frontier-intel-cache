@@ -38,11 +38,11 @@ Verifiable, persistent intelligence reports for on-chain games — built on Sui 
 2. Connect a Sui testnet wallet ([Slush](https://chromewebstore.google.com/detail/slush-a-sui-wallet/opcgpfmipidbgpenhmajoajpbobppdil) recommended). Get testnet SUI from the [official faucet](https://faucet.sui.io/) if needed.
 3. Fill the form, hit **Submit intel report**, sign the transaction, and watch the new record flash into the live feed.
 
-11+ records on-chain already, all verifiable on Sui + Walrus. One was filed by an external wallet (0xaec9…02a1) within 24h of the project's launch tweet.
+11+ records on-chain already, all verifiable on Sui + Walrus. One was filed by an external wallet (`0xaec9…02a1`) within 24h of the project's launch tweet.
 
 ---
 
-> **The problem nobody else is solving:** on-chain games like EVE Frontier need verifiable, persistent intelligence — kill reports, scout sightings, threat assessments — that any player can post and any player can trust. Storing that intel directly on Sui costs ~\$0.10+ per kilobyte. A single screenshot would cost twenty dollars. So games just... don't.
+> **The problem nobody else is solving:** on-chain games like EVE Frontier need verifiable, persistent intelligence — kill reports, scout sightings, threat assessments — that any player can post and any player can trust. Storing that intel directly on Sui costs ~$0.10+ per kilobyte. A single screenshot would cost twenty dollars. So games just... don't.
 >
 > **Frontier Intel Cache** breaks the wall: the *proof* of intel (who, when, where, what, hash) lives on Sui in a tamper-proof Move contract. The *payload* (full report, screenshots, ship fits, free-text) lives on Walrus — decentralized blob storage that's ~5x cheaper than traditional replication. Together: a crowd-sourced, censorship-resistant intelligence network where storage is no longer the bottleneck.
 
@@ -53,7 +53,7 @@ Verifiable, persistent intelligence reports for on-chain games — built on Sui 
 |  | Sui-only | Centralized DB | **Frontier Intel Cache** |
 |---|---|---|---|
 | Tamper-proof | ✅ | ❌ | ✅ |
-| Cheap storage | ❌ (\$\$\$) | ✅ | ✅ |
+| Cheap storage | ❌ ($$$) | ✅ | ✅ |
 | Censorship-resistant | ✅ | ❌ | ✅ |
 | Holds screenshots & rich payloads | ❌ | ✅ | ✅ |
 | Verifiable by smart contracts | ✅ | ❌ | ✅ |
@@ -65,7 +65,7 @@ The architecture isn't EVE-Frontier-specific. Same pattern works for any on-chai
 
 ## 🏗️ Architecture
 
-\`\`\`
+```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                                                                     │
 │   Player files intel report                                         │
@@ -103,11 +103,11 @@ The architecture isn't EVE-Frontier-specific. Same pattern works for any on-chai
 │   → renders full report, threat level, observed ships, free text    │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
-\`\`\`
+```
 
-**Read path:** Dashboard → \`/api/intel/feed\` → SQLite → render thin records → on click, fetch full blob from Walrus aggregator → render full report.
+**Read path:** Dashboard → `/api/intel/feed` → SQLite → render thin records → on click, fetch full blob from Walrus aggregator → render full report.
 
-**Write path:** Player fills form → POST \`/api/intel/upload\` (server uploads to Walrus) → returns \`blob_id\` → client signs \`submit_intel(...)\` tx on Sui → indexer picks up event ~5s later → dashboard updates live.
+**Write path:** Player fills form → POST `/api/intel/upload` (server uploads to Walrus) → returns `blob_id` → client signs `submit_intel(...)` tx on Sui → indexer picks up event ~5s later → dashboard updates live.
 
 ---
 
@@ -115,11 +115,11 @@ The architecture isn't EVE-Frontier-specific. Same pattern works for any on-chai
 
 | | |
 |---|---|
-| **Package** | [\`0x5fec…1741\`](https://suiscan.xyz/testnet/object/0x5fecdeefa2227a7d5f2ac432c27a6927933fe03b93c0e9d0560022f8a9781741) |
-| **Beacon (shared)** | [\`0x91df…73c8\`](https://suiscan.xyz/testnet/object/0x91dfc5a879265527ee7932b9bf9101951d418ff6a916a07c9df337954b7a73c8) |
-| **Submitter wallet** | [\`0xf46b…9024\`](https://suiscan.xyz/testnet/account/0xf46b1a404ccdba84f5edf87cfdd1d3e582abd0f28f9edd9d996af5c418da9024) |
-| **Sample tx** | [\`EhSi…Ah3y\`](https://suiscan.xyz/testnet/tx/EhSiKWfVXKw5H5CsVa1bYcV2FYeqDsqM5oKYsRg1Ah3y) |
-| **Sample Walrus blob** | [\`8x0l…HOy8\`](https://aggregator.walrus-testnet.walrus.space/v1/blobs/8x0lnHdhq1esNN6wWpOYcB3fsmiLqrmgjfWZLZyHOy8) |
+| **Package** | [`0x5fec…1741`](https://suiscan.xyz/testnet/object/0x5fecdeefa2227a7d5f2ac432c27a6927933fe03b93c0e9d0560022f8a9781741) |
+| **Beacon (shared)** | [`0x91df…73c8`](https://suiscan.xyz/testnet/object/0x91dfc5a879265527ee7932b9bf9101951d418ff6a916a07c9df337954b7a73c8) |
+| **Submitter wallet** | [`0xf46b…9024`](https://suiscan.xyz/testnet/account/0xf46b1a404ccdba84f5edf87cfdd1d3e582abd0f28f9edd9d996af5c418da9024) |
+| **Sample tx** | [`EhSi…Ah3y`](https://suiscan.xyz/testnet/tx/EhSiKWfVXKw5H5CsVa1bYcV2FYeqDsqM5oKYsRg1Ah3y) |
+| **Sample Walrus blob** | [`8x0l…HOy8`](https://aggregator.walrus-testnet.walrus.space/v1/blobs/8x0lnHdhq1esNN6wWpOYcB3fsmiLqrmgjfWZLZyHOy8) |
 
 ---
 
@@ -129,54 +129,54 @@ The architecture isn't EVE-Frontier-specific. Same pattern works for any on-chai
 
 - Linux/WSL/macOS terminal
 - Node.js 20+ and Python 3.11+
-- Sui CLI (\`suiup install sui@testnet\`)
+- Sui CLI (`suiup install sui@testnet`)
 - A Sui testnet wallet with faucet SUI ([faucet here](https://faucet.testnet.sui.io/))
 - Optional: Tatum API key from [dashboard.tatum.io](https://dashboard.tatum.io)
 
 ### 1. Smoke test (verify upstreams alive)
 
-\`\`\`bash
+```bash
 chmod +x scripts/smoke-test.sh
 ./scripts/smoke-test.sh
-\`\`\`
+```
 
 Expected: 3/3 checks pass. Walrus + Tatum Sui RPC reachable.
 
 ### 2. Publish the Move contract
 
-\`\`\`bash
+```bash
 cd smart-contract
 sui client switch --env testnet
 sui move build
 sui client publish --gas-budget 100000000
-\`\`\`
+```
 
 Note the **published package ID** from the output. Save it.
 
 ### 3. Run the backend
 
-\`\`\`bash
+```bash
 cd backend
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
 # Edit .env: set FRONTIER_INTEL_PACKAGE_ID to the ID from step 2
 python main.py
-\`\`\`
+```
 
-Health check: \`curl http://localhost:8090/api/health\`
+Health check: `curl http://localhost:8090/api/health`
 
 ### 4. Run the frontend
 
-\`\`\`bash
+```bash
 cd frontend
 npm install
 cp .env.example .env
 # Edit .env: VITE_API_URL=http://localhost:8090, VITE_PACKAGE_ID=...
 npm run dev
-\`\`\`
+```
 
-Open \`http://localhost:5173\`.
+Open `http://localhost:5173`.
 
 ### 5. File your first intel
 
@@ -186,23 +186,23 @@ In the dashboard, click **File Intel Report**, fill the form, sign the Sui tx wi
 
 ## 🔍 Smart Contract
 
-\`smart-contract/sources/intel_beacon.move\` — two object types, three events:
+`smart-contract/sources/intel_beacon.move` — two object types, three events:
 
 | | |
 |---|---|
-| \`Beacon\` (shared) | Deployable intel network. Anyone deploys, anyone submits. |
-| \`IntelRecord\` (shared) | Individual submission. Holds the Walrus \`blob_id\` reference. |
-| \`BeaconDeployed\` event | Fired on \`deploy_beacon(...)\` |
-| \`IntelSubmitted\` event | Fired on \`submit_intel(...)\` — this is what the indexer listens for |
-| \`BeaconDecommissioned\` event | Fired on owner-only \`decommission_beacon(...)\` |
+| `Beacon` (shared) | Deployable intel network. Anyone deploys, anyone submits. |
+| `IntelRecord` (shared) | Individual submission. Holds the Walrus `blob_id` reference. |
+| `BeaconDeployed` event | Fired on `deploy_beacon(...)` |
+| `IntelSubmitted` event | Fired on `submit_intel(...)` — this is what the indexer listens for |
+| `BeaconDecommissioned` event | Fired on owner-only `decommission_beacon(...)` |
 
 **Validation enforced on-chain:**
-- \`walrus_blob_id\` must be non-empty
-- \`system_id\` must be non-empty
-- \`threat_level\` must be 1..4 (LOW, MEDIUM, HIGH, CRITICAL)
-- \`decommission_beacon(...)\` is owner-only
+- `walrus_blob_id` must be non-empty
+- `system_id` must be non-empty
+- `threat_level` must be 1..4 (LOW, MEDIUM, HIGH, CRITICAL)
+- `decommission_beacon(...)` is owner-only
 
-Move tests: \`cd smart-contract && sui move test\`
+Move tests: `cd smart-contract && sui move test`
 
 ---
 
@@ -230,8 +230,8 @@ Submitted to the [Tatum × Walrus hackathon](https://tatum.io/tatum-x-walrus-hac
 - **Presentation (20%)** — Live demo, public Walrus URLs anyone can verify, clean docs, 2:30 video.
 
 **Eligible bonuses:**
-- 🌟 Best Walrus Integration (\$200)
-- ⚡ Best Use of Tatum Tools (\$200)
+- 🌟 Best Walrus Integration ($200)
+- ⚡ Best Use of Tatum Tools ($200)
 
 ---
 
